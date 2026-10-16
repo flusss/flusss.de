@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Foto – flusss.de</title>
+<meta name="description" content="Freie Fotografie von flusss.de: Landschaften, Straßen und Menschen.">
+<link rel="canonical" href="https://flusss.de/foto/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
+</head>
+<body>
+<style>
+/* Layout: Kontaktbogen – Bilder als nummerierte Filmfelder mit Randbeschriftung und EXIF-Daten */
+:root {
+  --bg: #e9ecea;
+  --paper: #f6f7f5;
+  --fg: #15191b;
+  --muted: #5d6763;
+  --line: #c9cfcc;
+  --accent: #b5770f;      /* Randbeschriftung auf Filmmaterial */
+  --film: #1b1f20;
+  --film-text: #d9a441;
+  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111415; --paper: #181c1d; --fg: #e6eae8; --muted: #8e9a96;
+    --line: #2b3133; --accent: #e0a63c; --film: #070909; --film-text: #e0a63c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111415; --paper: #181c1d; --fg: #e6eae8; --muted: #8e9a96;
+  --line: #2b3133; --accent: #e0a63c; --film: #070909; --film-text: #e0a63c;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+}
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Kopfzeile */
+header.top { border-bottom: 1px solid var(--line); }
+header.top .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-block: 18px; flex-wrap: wrap;
+}
+.brand { font-family: var(--mono); font-size: 14px; text-decoration: none; letter-spacing: .02em; }
+.brand b { font-weight: 500; }
+.brand span { color: var(--accent); }
+nav.main { display: flex; gap: 22px; font-size: 15px; }
+nav.main a { text-decoration: none; color: var(--muted); }
+nav.main a:hover, nav.main a[aria-current] { color: var(--fg); }
+
+/* Einstieg */
+.hero .wrap {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 48px; align-items: end; padding-block: 64px 40px;
+}
+.hero h1 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(88px, 17vw, 210px); line-height: .82; letter-spacing: -.045em;
+  margin: 0;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p { margin: 0 0 14px; max-width: 46ch; color: var(--muted); font-size: 18px; text-wrap: pretty; }
+.hero .meta {
+  font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+
+/* Filter */
+.filter .wrap { display: flex; gap: 8px; flex-wrap: wrap; padding-block: 8px 28px; }
+.chip {
+  font: 500 14px var(--body); color: var(--fg);
+  background: transparent; border: 1px solid var(--line); border-radius: 999px;
+  padding: 7px 16px; cursor: pointer;
+}
+.chip:hover { border-color: var(--fg); }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip .n { font-family: var(--mono); font-size: 12px; opacity: .6; margin-left: 6px; }
+
+/* Kontaktbogen */
+.sheet { background: var(--film); }
+.sheet .wrap { padding-block: 22px 30px; }
+.edge {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--film-text);
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding-bottom: 14px; text-transform: uppercase;
+}
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px 18px;
+}
+.frame { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.frame[hidden] { display: none !important; }
+.frame button {
+  all: unset; cursor: zoom-in; display: block; position: relative;
+  aspect-ratio: 3 / 2; max-width: 100%; overflow: hidden; border-radius: 2px;
+  background: #2a2f30;
+}
+.frame.tall button { aspect-ratio: 4 / 5; }
+.frame button:focus-visible { outline: 2px solid var(--film-text); outline-offset: 3px; }
+.frame canvas { width: 100%; height: 100%; display: block; transition: transform .6s ease; }
+.frame button:hover canvas { transform: scale(1.035); }
+.frame .no {
+  position: absolute; left: 8px; top: 6px; font-family: var(--mono); font-size: 11px;
+  color: rgba(255,255,255,.85); letter-spacing: .08em; text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+.frame figcaption { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.frame .t { color: #eef0ee; font-size: 15px; font-weight: 500; }
+.frame .x { font-family: var(--mono); font-size: 11px; color: #8f9a96; white-space: nowrap; }
+
+/* Über mich / Kontakt */
+.about .wrap {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px;
+  padding-block: 72px;
+}
+.about h2 {
+  font-family: var(--display); font-weight: 700; font-size: clamp(32px, 4.4vw, 52px);
+  line-height: 1.02; letter-spacing: -.02em; margin: 0 0 18px; text-wrap: balance;
+}
+.about p { max-width: 62ch; margin: 0 0 14px; }
+.kit { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
+.kit li {
+  display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 12px;
+  padding-block: 10px; border-bottom: 1px solid var(--line); font-size: 15px;
+}
+.kit li span:first-child {
+  font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted);
+  padding-top: 2px;
+}
+.contact {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 4px;
+  padding: 28px; align-self: start; display: flex; flex-direction: column; gap: 14px;
+}
+.contact h3 { font-family: var(--display); font-size: 24px; margin: 0; }
+.contact p { margin: 0; color: var(--muted); }
+.mail { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.mail code {
+  font-family: var(--mono); font-size: 16px; padding: 8px 12px; border: 1px solid var(--line);
+  border-radius: 3px; user-select: all; background: var(--bg);
+}
+.btn {
+  font: 600 14px var(--body); background: var(--fg); color: var(--bg); border: 0;
+  border-radius: 3px; padding: 10px 16px; cursor: pointer;
+}
+.btn:hover { background: var(--accent); color: #fff; }
+.contact small { font-family: var(--mono); font-size: 12px; color: var(--muted); min-height: 1.2em; }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap {
+  padding-block: 22px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  font-size: 13px; color: var(--muted);
+}
+footer a { color: var(--muted); }
+
+/* Großansicht */
+.lb {
+  position: fixed; inset: 0; z-index: 50; background: rgba(6,8,8,.94);
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  color: #eef0ee;
+}
+.lb-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; color: #d9a441; letter-spacing: .1em; }
+.lb-stage { display: grid; place-items: center; min-height: 0; padding-block: 12px; }
+.lb-stage canvas { max-width: 100%; max-height: 100%; width: auto; height: auto; }
+.lb-info { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; }
+.lb-info .t { font-family: var(--display); font-size: 24px; font-weight: 700; }
+.lb-info .x { font-family: var(--mono); font-size: 12px; color: #9aa5a1; }
+.lb button {
+  font: 500 14px var(--body); color: #eef0ee; background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18); border-radius: 3px; padding: 8px 12px; cursor: pointer;
+}
+.lb button:hover { background: rgba(255,255,255,.16); }
+.lb-nav { display: flex; gap: 8px; }
+
+@media (max-width: 760px) {
+  .hero .wrap, .about .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .hero .wrap { padding-block: 40px 28px; }
+  .about .wrap { padding-block: 48px; }
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .kit li { grid-template-columns: 7em minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .frame canvas { transition: none; }
+  .frame button:hover canvas { transform: none; }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><b>flusss.de</b><span>/foto</span></a>
+    <nav class="main" aria-label="Hauptnavigation">
+      <a href="#top" aria-current="page">Foto</a>
+      <a href="/messe/">Messe</a>
+      <a href="#about">Über mich</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Fo<em>to</em></h1>
+      <div>
+        <p>Landschaften, Straßen und Menschen. Fotografiert zwischen Rhein, Ostsee und den Orten dazwischen. Meist zu Fuß, mit einer Kamera und einem Objektiv.</p>
+        <div class="meta"><span>12 Bilder</span><span>2024 – 2026</span><span>Sony α7 V</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="filter" aria-label="Kategorien">
+    <div class="wrap" id="chips"></div>
+  </section>
+
+  <section class="sheet" aria-label="Bilder">
+    <div class="wrap">
+      <div class="edge" aria-hidden="true"><span>flusss · Kontaktbogen</span><span>Platzhalter – eigene Bilder folgen</span><span>▸ 1–12</span></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div>
+        <h2>Ich fotografiere, was am Rand passiert.</h2>
+        <p>Die meisten Bilder entstehen nebenbei: auf dem Weg zur Arbeit, am Wochenende am Fluss, auf Reisen ohne festen Plan. Mich interessiert das Licht kurz nach Sonnenaufgang und die Stunde, bevor die Straßenlaternen angehen.</p>
+        <p>Für Porträts, kleine Veranstaltungen oder Bilder für Ihre Website können Sie mich gern anfragen.</p>
+        <ul class="kit">
+          <li><span>Kamera</span><span>Sony α7 V</span></li>
+          <li><span>Objektiv</span><span>Sony FE 28–70 mm F2 GM</span></li>
+        </ul>
+      </div>
+      <aside class="contact" id="kontakt">
+        <h3>Kontakt</h3>
+        <p>Anfragen für Aufträge, Abzüge oder einfach ein Hallo.</p>
+        <div class="mail">
+          <code id="mail">hallo@flusss.de</code>
+          <button class="btn" id="copy" type="button">Adresse kopieren</button>
+        </div>
+        <small id="copied" aria-live="polite"></small>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 flusss.de · Alle Bilder urheberrechtlich geschützt</span>
+    <span><a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a></span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Großansicht">
+  <div class="lb-bar"><span id="lbNo"></span><button type="button" id="lbClose">Schließen ✕</button></div>
+  <div class="lb-stage" id="lbStage"></div>
+  <div class="lb-info">
+    <div><div class="t" id="lbT"></div><div class="x" id="lbX"></div></div>
+    <div class="lb-nav"><button type="button" id="lbPrev">← Zurück</button><button type="button" id="lbNext">Weiter →</button></div>
+  </div>
+</div>
+
+<script>
+// Platzhalterbilder: einfache gemalte Szenen, bis echte Fotos eingesetzt werden.
+const PHOTOS = [
+  { t: "Morgennebel am Rhein", c: "landschaft", x: "28 mm · f/8 · 1/250 s · ISO 160", p: ["#f3c9a3","#b9c7cf","#58707a","#2c3c42"], s: "hills", sun: .7 },
+  { t: "Hinterhof, Köln-Ehrenfeld", c: "stadt", x: "35 mm · f/2 · 1/60 s · ISO 800", p: ["#3d4a63","#8a6f5a","#d7a35e","#1e2230"], s: "city", tall: true },
+  { t: "Großmutter, Küche", c: "portraet", x: "70 mm · f/2 · 1/125 s · ISO 400", p: ["#e8c9a8","#a6735a","#5c3d32","#2a1d1a"], s: "portrait" },
+  { t: "Ostsee im Februar", c: "landschaft", x: "28 mm · f/11 · 1/500 s · ISO 125", p: ["#dfe6ea","#a7b8c2","#64808f","#34505e"], s: "sea", sun: .3 },
+  { t: "Letzte Bahn", c: "stadt", x: "35 mm · f/2 · 1/30 s · ISO 3200", p: ["#151a2b","#2f3a5c","#e2b34f","#0b0d14"], s: "city" },
+  { t: "Felder bei Bonn", c: "landschaft", x: "35 mm · f/5.6 · 1/320 s · ISO 100", p: ["#f1d7a0","#c9b26a","#7f8a4a","#3e4a2a"], s: "hills", sun: .2, tall: true },
+  { t: "Lena, Atelier", c: "portraet", x: "70 mm · f/2 · 1/60 s · ISO 800", p: ["#d8d8d4","#8f8f8a","#4e4e4b","#1d1d1c"], s: "portrait" },
+  { t: "Markthalle, Samstag", c: "stadt", x: "28 mm · f/4 · 1/125 s · ISO 640", p: ["#e9dcc6","#b8875b","#6c4a35","#2a2320"], s: "city" },
+  { t: "Abends am Deich", c: "landschaft", x: "35 mm · f/4 · 1/250 s · ISO 200", p: ["#f6b26b","#d9747a","#6b5a83","#2a2c45"], s: "sea", sun: .55 },
+  { t: "Tom, Werkstatt", c: "portraet", x: "35 mm · f/2 · 1/100 s · ISO 1250", p: ["#c9b394","#7d6650","#43362c","#191512"], s: "portrait", tall: true },
+  { t: "Regen, Südstadt", c: "stadt", x: "28 mm · f/2 · 1/60 s · ISO 1600", p: ["#5d6b78","#8d99a3","#c4a46a","#262d33"], s: "city" },
+  { t: "Eifel, erster Schnee", c: "landschaft", x: "28 mm · f/8 · 1/400 s · ISO 100", p: ["#eef1f3","#c7d0d6","#8b9aa3","#4a5961"], s: "hills", sun: .85 },
+];
+const CATS = [["alle","Alle"],["landschaft","Landschaft"],["stadt","Stadt"],["portraet","Porträt"]];
+
+function rng(seed) { return () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+
+function paint(cv, ph, i, w, h) {
+  cv.width = w; cv.height = h;
+  const g = cv.getContext("2d"), r = rng(i * 7919 + 13), [a, b, c, d] = ph.p;
+  const sky = g.createLinearGradient(0, 0, 0, h);
+  sky.addColorStop(0, b); sky.addColorStop(.62, a); sky.addColorStop(1, c);
+  g.fillStyle = sky; g.fillRect(0, 0, w, h);
+
+  if (ph.s === "hills" || ph.s === "sea") {
+    if (ph.sun != null) {
+      const sx = w * ph.sun, sy = h * .5, rad = Math.min(w, h) * .09;
+      const glow = g.createRadialGradient(sx, sy, 0, sx, sy, rad * 5);
+      glow.addColorStop(0, "rgba(255,240,215,.85)"); glow.addColorStop(1, "rgba(255,240,215,0)");
+      g.fillStyle = glow; g.fillRect(0, 0, w, h);
+      g.fillStyle = "rgba(255,248,232,.95)"; g.beginPath(); g.arc(sx, sy, rad, 0, Math.PI * 2); g.fill();
+    }
+    if (ph.s === "hills") {
+      for (let L = 0; L < 4; L++) {
+        const base = h * (.55 + L * .11);
+        g.fillStyle = L === 3 ? d : mix(c, d, L / 3);
+        g.globalAlpha = .55 + L * .15;
+        g.beginPath(); g.moveTo(0, h);
+        const f1 = 1 + r() * 2, f2 = 2 + r() * 3, ph1 = r() * 6, amp = h * (.06 - L * .008);
+        for (let x = 0; x <= w; x += 6) g.lineTo(x, base - Math.sin(x / w * f1 * Math.PI + ph1) * amp - Math.sin(x / w * f2 * Math.PI) * amp * .4);
+        g.lineTo(w, h); g.fill();
+      }
+      g.globalAlpha = 1;
+    } else {
+      const hz = h * .6;
+      g.fillStyle = c; g.fillRect(0, hz, w, h - hz);
+      const sea = g.createLinearGradient(0, hz, 0, h); sea.addColorStop(0, c); sea.addColorStop(1, d);
+      g.fillStyle = sea; g.fillRect(0, hz, w, h - hz);
+      g.strokeStyle = "rgba(255,255,255,.25)"; g.lineWidth = 1;
+      for (let k = 0; k < 40; k++) { const y = hz + Math.pow(r(), 1.6) * (h - hz); const x = r() * w; g.beginPath(); g.moveTo(x, y); g.lineTo(x + 10 + r() * 40, y); g.stroke(); }
+    }
+  } else if (ph.s === "city") {
+    g.fillStyle = d;
+    let x = -10;
+    while (x < w) {
+      const bw = w * (.06 + r() * .12), bh = h * (.3 + r() * .55);
+      g.fillStyle = mix(d, c, r() * .25); g.fillRect(x, h - bh, bw, bh);
+      g.fillStyle = c;
+      for (let wy = h - bh + 10; wy < h - 12; wy += 14) for (let wx = x + 6; wx < x + bw - 8; wx += 11) if (r() > .62) { g.globalAlpha = .4 + r() * .6; g.fillRect(wx, wy, 5, 7); }
+      g.globalAlpha = 1; x += bw + 2;
+    }
+    const fog = g.createLinearGradient(0, h * .7, 0, h); fog.addColorStop(0, "rgba(0,0,0,0)"); fog.addColorStop(1, "rgba(0,0,0,.45)");
+    g.fillStyle = fog; g.fillRect(0, 0, w, h);
+  } else {
+    const light = g.createRadialGradient(w * .2, h * .2, 0, w * .2, h * .2, w * .9);
+    light.addColorStop(0, a); light.addColorStop(1, d);
+    g.fillStyle = light; g.fillRect(0, 0, w, h);
+    const cx = w * (.48 + r() * .1), cy = h * .42, s = Math.min(w, h);
+    g.fillStyle = c; g.beginPath(); g.ellipse(cx, h * 1.02, s * .42, s * .36, 0, Math.PI, 0); g.fill();
+    g.fillStyle = b; g.beginPath(); g.ellipse(cx, cy, s * .14, s * .18, 0, 0, Math.PI * 2); g.fill();
+    const shade = g.createLinearGradient(cx - s * .14, 0, cx + s * .14, 0);
+    shade.addColorStop(0, "rgba(0,0,0,0)"); shade.addColorStop(1, "rgba(0,0,0,.45)");
+    g.fillStyle = shade; g.beginPath(); g.ellipse(cx, cy, s * .14, s * .18, 0, 0, Math.PI * 2); g.fill();
+  }
+  // Korn
+  const img = g.getImageData(0, 0, w, h), px = img.data;
+  for (let k = 0; k < px.length; k += 4) { const n = (r() - .5) * 22; px[k] += n; px[k + 1] += n; px[k + 2] += n; }
+  g.putImageData(img, 0, 0);
+  // Vignette
+  const v = g.createRadialGradient(w / 2, h / 2, Math.min(w, h) * .35, w / 2, h / 2, Math.max(w, h) * .75);
+  v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.35)");
+  g.fillStyle = v; g.fillRect(0, 0, w, h);
+}
+function mix(h1, h2, t) {
+  const p = s => [1, 3, 5].map(i => parseInt(s.slice(i, i + 2), 16));
+  const A = p(h1), B = p(h2);
+  return "rgb(" + A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",") + ")";
+}
+
+const grid = document.getElementById("grid");
+const pad = n => String(n).padStart(2, "0");
+PHOTOS.forEach((ph, i) => {
+  const fig = document.createElement("figure");
+  fig.className = "frame" + (ph.tall ? " tall" : "");
+  fig.dataset.cat = ph.c;
+  fig.innerHTML = `<button type="button" aria-label="${ph.t} vergrößern"><canvas></canvas><span class="no">${pad(i + 1)}A</span></button>
+    <figcaption><span class="t">${ph.t}</span><span class="x">${ph.x.split(" · ").slice(0, 2).join(" · ")}</span></figcaption>`;
+  const [w, h] = ph.tall ? [480, 600] : [600, 400];
+  paint(fig.querySelector("canvas"), ph, i, w, h);
+  fig.querySelector("button").addEventListener("click", () => openLb(i));
+  grid.appendChild(fig);
+});
+
+let cat = "alle";
+try { cat = localStorage.getItem("foto-cat") || "alle"; } catch (e) {}
+const chips = document.getElementById("chips");
+CATS.forEach(([k, label]) => {
+  const n = k === "alle" ? PHOTOS.length : PHOTOS.filter(p => p.c === k).length;
+  const b = document.createElement("button");
+  b.className = "chip"; b.type = "button"; b.id = "chip-" + k;
+  b.innerHTML = `${label}<span class="n">${n}</span>`;
+  b.addEventListener("click", () => setCat(k));
+  chips.appendChild(b);
+});
+function setCat(k) {
+  cat = k;
+  try { localStorage.setItem("foto-cat", k); } catch (e) {}
+  chips.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.id === "chip-" + k));
+  grid.querySelectorAll(".frame").forEach(f => f.hidden = k !== "alle" && f.dataset.cat !== k);
+}
+setCat(cat);
+
+// Großansicht
+const lb = document.getElementById("lb");
+let cur = 0;
+function visible() { return PHOTOS.map((p, i) => i).filter(i => cat === "alle" || PHOTOS[i].c === cat); }
+function openLb(i) {
+  cur = i; const ph = PHOTOS[i];
+  const cv = document.createElement("canvas");
+  paint(cv, ph, i, ph.tall ? 960 : 1500, ph.tall ? 1200 : 1000);
+  const st = document.getElementById("lbStage"); st.replaceChildren(cv);
+  document.getElementById("lbNo").textContent = pad(i + 1) + "A / " + pad(PHOTOS.length);
+  document.getElementById("lbT").textContent = ph.t;
+  document.getElementById("lbX").textContent = ph.x;
+  lb.hidden = false; document.body.style.overflow = "hidden";
+  document.getElementById("lbClose").focus();
+}
+function step(d) { const v = visible(); const k = v.indexOf(cur); openLb(v[(k + d + v.length) % v.length]); }
+function closeLb() {
+  lb.hidden = true; document.body.style.overflow = "";
+  grid.children[cur]?.querySelector("button")?.focus();
+}
+document.getElementById("lbClose").onclick = closeLb;
+document.getElementById("lbPrev").onclick = () => step(-1);
+document.getElementById("lbNext").onclick = () => step(1);
+lb.addEventListener("click", e => { if (e.target === lb || e.target.id === "lbStage") closeLb(); });
+document.addEventListener("keydown", e => {
+  if (lb.hidden) return;
+  if (e.key === "Escape") closeLb();
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
+});
+
+// E-Mail kopieren
+document.getElementById("copy").addEventListener("click", () => {
+  const msg = document.getElementById("copied"), addr = document.getElementById("mail").textContent;
+  const fallback = () => {
+    const sel = getSelection(), rg = document.createRange();
+    rg.selectNodeContents(document.getElementById("mail")); sel.removeAllRanges(); sel.addRange(rg);
+    msg.textContent = "Adresse markiert – mit Strg+C kopieren.";
+  };
+  try {
+    navigator.clipboard.writeText(addr).then(() => msg.textContent = "Kopiert.", fallback);
+  } catch (e) { fallback(); }
+});
+</script>
+</body>
+</html>
