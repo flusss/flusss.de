@@ -148,12 +148,8 @@ nav.main a:hover, nav.main a[aria-current] { color: var(--fg); }
 }
 .contact h3 { font-family: var(--display); font-size: 24px; margin: 0; }
 .contact p { margin: 0; color: var(--muted); }
-.mail { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.mail code {
-  font-family: var(--mono); font-size: 16px; padding: 8px 12px; border: 1px solid var(--line);
-  border-radius: 3px; user-select: all; background: var(--bg);
-}
 .btn {
+  display: inline-block; text-decoration: none;
   font: 600 14px var(--body); background: var(--fg); color: var(--bg); border: 0;
   border-radius: 3px; padding: 10px 16px; cursor: pointer;
 }
@@ -248,11 +244,7 @@ footer a { color: var(--muted); }
       <aside class="contact" id="kontakt">
         <h3>Kontakt</h3>
         <p>Anfragen für Aufträge, Abzüge oder einfach ein Hallo.</p>
-        <div class="mail">
-          <code id="mail">hallo@flusss.de</code>
-          <button class="btn" id="copy" type="button">Adresse kopieren</button>
-        </div>
-        <small id="copied" aria-live="polite"></small>
+        <p><a class="btn" href="https://flusss.de/impressum/">Kontaktdaten im Impressum</a></p>
       </aside>
     </div>
   </section>
@@ -430,18 +422,6 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowRight") step(1);
 });
 
-// E-Mail kopieren
-document.getElementById("copy").addEventListener("click", () => {
-  const msg = document.getElementById("copied"), addr = document.getElementById("mail").textContent;
-  const fallback = () => {
-    const sel = getSelection(), rg = document.createRange();
-    rg.selectNodeContents(document.getElementById("mail")); sel.removeAllRanges(); sel.addRange(rg);
-    msg.textContent = "Adresse markiert – mit Strg+C kopieren.";
-  };
-  try {
-    navigator.clipboard.writeText(addr).then(() => msg.textContent = "Kopiert.", fallback);
-  } catch (e) { fallback(); }
-});
 </script>
 </body>
 </html>
