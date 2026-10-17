@@ -249,7 +249,9 @@ footer a { color: var(--muted); }
 <script>
 // Bilder und Messen stehen in fotos.json (gepflegt über „网站照片“ in der Notiz-App).
 (async () => {
-const { hero, events: EVENTS } = await (await fetch("/foto/fotos.json", { cache: "no-cache" })).json();
+// Mit Zeitstempel: GitHub Pages hält Dateien bis zu 10 Minuten im Zwischenspeicher — ohne ihn
+// stand ein eben gelöschtes Bild noch in der Liste (Kachel aus dem Browser-Speicher, Großansicht leer).
+const { hero, events: EVENTS } = await (await fetch(`/foto/fotos.json?v=${Date.now()}`, { cache: "no-store" })).json();
 const ALL = [];
 const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
