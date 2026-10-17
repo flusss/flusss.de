@@ -1,88 +1,14 @@
 <!doctype html>
 <html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>flusss.de</title>
-<meta name="description" content="flusss.de – Fotografie und Messefotografie von Nan Jiang.">
-<link rel="canonical" href="https://flusss.de/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/fonts/fonts.css">
-<style>body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
-</head>
-<body>
-<style>
-/* Layout: Startseite als Verzeichnis – zwei große Einträge, darunter ein Bildstreifen */
-:root {
-  --bg: #e9ecea; --paper: #f6f7f5; --fg: #15191b; --muted: #5d6763; --line: #c9cfcc; --accent: #b5770f; --tile: #d5dad8;
-  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #111415; --paper: #181c1d; --fg: #e6eae8; --muted: #8e9a96; --line: #2b3133; --accent: #e0a63c; --tile: #222829; color-scheme: dark; }
-}
-* { box-sizing: border-box; }
-body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6; }
-.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-a { color: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-header .wrap { padding-block: 18px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 14px; display: flex; justify-content: space-between; gap: 12px; }
-header span { color: var(--muted); }
-.intro .wrap { padding-block: 64px 32px; }
-h1 { font-family: var(--display); font-weight: 800; font-size: clamp(72px, 15vw, 190px); line-height: .82; letter-spacing: -.045em; margin: 0 0 20px; }
-h1 em { font-style: normal; color: var(--accent); }
-.intro p { margin: 0; max-width: 48ch; color: var(--muted); font-size: 18px; }
-.entries { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.entries a { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) auto; gap: 24px; align-items: center; padding-block: 26px; border-bottom: 1px solid var(--line); text-decoration: none; }
-.entries .n { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 6vw, 72px); line-height: 1; letter-spacing: -.03em; }
-.entries .d { color: var(--muted); }
-.entries .p { font-family: var(--mono); font-size: 13px; color: var(--muted); }
-.entries a:hover .n, .entries a:hover .p { color: var(--accent); }
-.strip .wrap { padding-block: 40px 64px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.strip img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 2px; background: var(--tile); }
-footer .wrap { padding-block: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
-footer a { color: var(--muted); }
-@media (max-width: 700px) {
-  .entries a { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; }
-  .entries .d { grid-column: 1 / -1; grid-row: 2; }
-  .strip .wrap { grid-template-columns: minmax(0, 1fr); }
-}
-</style>
-
-<header><div class="wrap"><b>flusss.de</b><span>Fotografie · Köln</span></div></header>
-
-<main>
-  <section class="intro">
-    <div class="wrap">
-      <h1>flu<em>sss</em></h1>
-      <p>Ich bin Nan Jiang und fotografiere Messen, Produkte und das, was mir unterwegs begegnet.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <ul class="entries">
-        <li><a href="/messe/"><span class="n">Messe</span><span class="d">Messefotografie für Aussteller: Stand, Gespräche, Exponate. Sechs Fachmessen von 2021 bis 2025.</span><span class="p">/messe →</span></a></li>
-        <li><a href="/foto/"><span class="n">Foto</span><span class="d">Freie Arbeiten: Landschaften, Straßen und Menschen.</span><span class="p">/foto →</span></a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="strip" aria-label="Ausgewählte Bilder">
-    <div class="wrap">
-      <img src="/foto/img/nan04522-s.jpg" alt="Messestand mit Kaffeebar und Saxofonist, Rotterdam 2023" width="800" height="533">
-      <img src="/foto/img/nan08497-s.jpg" alt="Stand eines Gabelstapler-Herstellers auf der LogiMAT 2024" width="800" height="533">
-      <img src="/foto/img/nan02185-s.jpg" alt="Produktbild vor Groß St. Martin in Köln" width="800" height="533">
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <span>© 2026 flusss.de</span>
-    <span><a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a></span>
-  </div>
-</footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f7f3" />
+    <title>SKR03 Kontenrahmen 2026</title>
+    <script type="module" crossorigin src="/assets/index-CrReSSfb.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DfEqL_uJ.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
