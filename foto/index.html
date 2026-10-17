@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Foto – flusss.de</title>
-<meta name="description" content="Freie Fotografie von flusss.de: Landschaften, Straßen und Menschen.">
+<title>Messefotografie – flusss.de</title>
+<meta name="description" content="Messefotografie von flusss.de – Stände, Gespräche und Produkte auf Fachmessen in Nürnberg, Stuttgart, Köln, Düsseldorf und Rotterdam.">
 <link rel="canonical" href="https://flusss.de/foto/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -12,16 +12,15 @@
 </head>
 <body>
 <style>
-/* Layout: Kontaktbogen – Bilder als nummerierte Filmfelder mit Randbeschriftung und EXIF-Daten */
+/* Layout: Messekatalog – jede Messe ein Kapitel mit Kopfzeile (Ort, Datum, Bildzahl) und Bildraster; EXIF als Fußnote */
 :root {
   --bg: #e9ecea;
   --paper: #f6f7f5;
   --fg: #15191b;
   --muted: #5d6763;
   --line: #c9cfcc;
-  --accent: #b5770f;      /* Randbeschriftung auf Filmmaterial */
-  --film: #1b1f20;
-  --film-text: #d9a441;
+  --accent: #b5770f;
+  --tile: #d5dad8;
   --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
   --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -29,170 +28,148 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #111415; --paper: #181c1d; --fg: #e6eae8; --muted: #8e9a96;
-    --line: #2b3133; --accent: #e0a63c; --film: #070909; --film-text: #e0a63c;
+    --line: #2b3133; --accent: #e0a63c; --tile: #222829;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #111415; --paper: #181c1d; --fg: #e6eae8; --muted: #8e9a96;
-  --line: #2b3133; --accent: #e0a63c; --film: #070909; --film-text: #e0a63c;
+  --line: #2b3133; --accent: #e0a63c; --tile: #222829;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
-body {
-  background: var(--bg); color: var(--fg);
-  font-family: var(--body); font-size: 16px; line-height: 1.6;
-}
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6; }
 .wrap {
-  max-width: 1180px; margin: 0 auto;
+  max-width: 1240px; margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.label { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
 
-/* Kopfzeile */
 header.top { border-bottom: 1px solid var(--line); }
-header.top .wrap {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding-block: 18px; flex-wrap: wrap;
-}
-.brand { font-family: var(--mono); font-size: 14px; text-decoration: none; letter-spacing: .02em; }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; flex-wrap: wrap; }
+.brand { font-family: var(--mono); font-size: 14px; text-decoration: none; }
 .brand b { font-weight: 500; }
 .brand span { color: var(--accent); }
-nav.main { display: flex; gap: 22px; font-size: 15px; }
+nav.main { display: flex; gap: 22px; font-size: 15px; flex-wrap: wrap; }
 nav.main a { text-decoration: none; color: var(--muted); }
-nav.main a:hover, nav.main a[aria-current] { color: var(--fg); }
+nav.main a:hover { color: var(--fg); }
 
 /* Einstieg */
-.hero .wrap {
-  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 48px; align-items: end; padding-block: 64px 40px;
-}
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 40px; align-items: end; padding-block: 56px 48px; }
 .hero h1 {
-  font-family: var(--display); font-weight: 800;
-  font-size: clamp(88px, 17vw, 210px); line-height: .82; letter-spacing: -.045em;
-  margin: 0;
+  font-family: var(--display); font-weight: 800; margin: 0 0 22px;
+  font-size: clamp(54px, 8.4vw, 116px); line-height: .86; letter-spacing: -.04em;
+  hyphens: manual;
 }
 .hero h1 em { font-style: normal; color: var(--accent); }
-.hero p { margin: 0 0 14px; max-width: 46ch; color: var(--muted); font-size: 18px; text-wrap: pretty; }
-.hero .meta {
-  font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em;
-  color: var(--muted); display: flex; gap: 18px; flex-wrap: wrap;
-}
+.hero p { margin: 0 0 22px; max-width: 44ch; color: var(--muted); font-size: 18px; text-wrap: pretty; }
+.hero figure { margin: 0; }
+.hero figure button { all: unset; display: block; cursor: zoom-in; width: 100%; }
+.hero img { display: block; width: 100%; height: auto; max-width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 2px; background: var(--tile); }
+.hero figcaption { display: flex; justify-content: space-between; gap: 12px; padding-top: 8px; font-size: 14px; color: var(--muted); flex-wrap: wrap; }
 
-/* Filter */
-.filter .wrap { display: flex; gap: 8px; flex-wrap: wrap; padding-block: 8px 28px; }
-.chip {
-  font: 500 14px var(--body); color: var(--fg);
-  background: transparent; border: 1px solid var(--line); border-radius: 999px;
-  padding: 7px 16px; cursor: pointer;
+/* Messeverzeichnis */
+.index { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.index a {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto; gap: 12px; align-items: baseline;
+  padding-block: 10px; border-bottom: 1px solid var(--line); text-decoration: none;
 }
-.chip:hover { border-color: var(--fg); }
-.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.chip .n { font-family: var(--mono); font-size: 12px; opacity: .6; margin-left: 6px; }
+.index a:hover .n { color: var(--accent); }
+.index .n { font-family: var(--display); font-weight: 700; font-size: 19px; }
+.index .o { color: var(--muted); font-size: 14px; }
+.index .c { font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
-/* Kontaktbogen */
-.sheet { background: var(--film); }
-.sheet .wrap { padding-block: 22px 30px; }
-.edge {
-  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--film-text);
-  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-  padding-bottom: 14px; text-transform: uppercase;
+/* Kapitel */
+.event { border-top: 1px solid var(--line); scroll-margin-top: 12px; }
+.event .wrap { padding-block: 44px 56px; }
+.event-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end; margin-bottom: 26px; }
+.event h2 {
+  font-family: var(--display); font-weight: 800; margin: 6px 0 0;
+  font-size: clamp(36px, 5.2vw, 64px); line-height: .95; letter-spacing: -.03em;
 }
+.event-head p { margin: 0; max-width: 56ch; color: var(--muted); text-wrap: pretty; }
+.facts { display: flex; gap: 8px 18px; flex-wrap: wrap; }
+.facts span:first-child { color: var(--accent); }
+
 .grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px 18px;
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: dense;
 }
-.frame { margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.frame[hidden] { display: none !important; }
-.frame button {
-  all: unset; cursor: zoom-in; display: block; position: relative;
-  aspect-ratio: 3 / 2; max-width: 100%; overflow: hidden; border-radius: 2px;
-  background: #2a2f30;
+.tile { margin: 0; position: relative; aspect-ratio: 3 / 2; max-width: 100%; }
+.tile.f { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+.tile.p { grid-row: span 2; aspect-ratio: auto; }
+.tile button { all: unset; cursor: zoom-in; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 2px; background: var(--tile); }
+.tile button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tile img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.tile button:hover img { transform: scale(1.03); }
+.tile figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 8px;
+  color: #fff; font-size: 13px; line-height: 1.3; pointer-events: none;
+  background: linear-gradient(transparent, rgba(0,0,0,.6));
+  opacity: 0; transition: opacity .25s ease;
 }
-.frame.tall button { aspect-ratio: 4 / 5; }
-.frame button:focus-visible { outline: 2px solid var(--film-text); outline-offset: 3px; }
-.frame canvas { width: 100%; height: 100%; display: block; transition: transform .6s ease; }
-.frame button:hover canvas { transform: scale(1.035); }
-.frame .no {
-  position: absolute; left: 8px; top: 6px; font-family: var(--mono); font-size: 11px;
-  color: rgba(255,255,255,.85); letter-spacing: .08em; text-shadow: 0 1px 2px rgba(0,0,0,.5);
-}
-.frame figcaption { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
-.frame .t { color: #eef0ee; font-size: 15px; font-weight: 500; }
-.frame .x { font-family: var(--mono); font-size: 11px; color: #8f9a96; white-space: nowrap; }
+.tile button:hover + figcaption, .tile button:focus-visible + figcaption { opacity: 1; }
 
-/* Über mich / Kontakt */
-.about .wrap {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px;
-  padding-block: 72px;
+/* Leistungen */
+.services { border-top: 1px solid var(--line); background: var(--paper); }
+.services .wrap { padding-block: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 40px; }
+.services h2, .contact h2 {
+  font-family: var(--display); font-weight: 800; font-size: clamp(34px, 4.4vw, 54px);
+  line-height: 1; letter-spacing: -.025em; margin: 0; text-wrap: balance;
 }
-.about h2 {
-  font-family: var(--display); font-weight: 700; font-size: clamp(32px, 4.4vw, 52px);
-  line-height: 1.02; letter-spacing: -.02em; margin: 0 0 18px; text-wrap: balance;
-}
-.about p { max-width: 62ch; margin: 0 0 14px; }
-.kit { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
-.kit li {
-  display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 12px;
-  padding-block: 10px; border-bottom: 1px solid var(--line); font-size: 15px;
-}
-.kit li span:first-child {
-  font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted);
-  padding-top: 2px;
-}
-.contact {
-  background: var(--paper); border: 1px solid var(--line); border-radius: 4px;
-  padding: 28px; align-self: start; display: flex; flex-direction: column; gap: 14px;
-}
-.contact h3 { font-family: var(--display); font-size: 24px; margin: 0; }
-.contact p { margin: 0; color: var(--muted); }
-.btn {
-  display: inline-block; text-decoration: none;
-  font: 600 14px var(--body); background: var(--fg); color: var(--bg); border: 0;
-  border-radius: 3px; padding: 10px 16px; cursor: pointer;
-}
+.svc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; }
+.svc h3 { font-family: var(--display); font-size: 21px; margin: 0 0 6px; }
+.svc p { margin: 0; color: var(--muted); }
+.kit { grid-column: 1 / -1; display: flex; gap: 8px 24px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid var(--line); }
+.kit span b { font-family: var(--body); font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--fg); font-size: 15px; margin-left: 6px; }
+
+.contact { border-top: 1px solid var(--line); }
+.contact .wrap { padding-block: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: end; }
+.contact p { margin: 14px 0 0; max-width: 48ch; color: var(--muted); }
+.btn { display: inline-block; text-decoration: none; font: 600 14px var(--body); background: var(--fg); color: var(--bg); border: 0; border-radius: 3px; padding: 12px 16px; cursor: pointer; }
 .btn:hover { background: var(--accent); color: #fff; }
-.contact small { font-family: var(--mono); font-size: 12px; color: var(--muted); min-height: 1.2em; }
 
 footer { border-top: 1px solid var(--line); }
-footer .wrap {
-  padding-block: 22px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-  font-size: 13px; color: var(--muted);
-}
+footer .wrap { padding-block: 22px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
 footer a { color: var(--muted); }
 
 /* Großansicht */
 .lb {
-  position: fixed; inset: 0; z-index: 50; background: rgba(6,8,8,.94);
+  position: fixed; inset: 0; z-index: 50; background: rgba(6,8,8,.95); color: #eef0ee;
   display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
   padding: calc(14px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
-  color: #eef0ee;
 }
-.lb-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; color: #d9a441; letter-spacing: .1em; }
+.lb[hidden] { display: none; }
+.lb-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; color: #e0a63c; text-transform: uppercase; }
 .lb-stage { display: grid; place-items: center; min-height: 0; padding-block: 12px; }
-.lb-stage canvas { max-width: 100%; max-height: 100%; width: auto; height: auto; }
-.lb-info { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; }
-.lb-info .t { font-family: var(--display); font-size: 24px; font-weight: 700; }
+.lb-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lb-info { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: end; }
+.lb-info .t { font-family: var(--display); font-size: 22px; font-weight: 700; }
 .lb-info .x { font-family: var(--mono); font-size: 12px; color: #9aa5a1; }
-.lb button {
-  font: 500 14px var(--body); color: #eef0ee; background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.18); border-radius: 3px; padding: 8px 12px; cursor: pointer;
-}
+.lb button { font: 500 14px var(--body); color: #eef0ee; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 3px; padding: 8px 12px; cursor: pointer; }
 .lb button:hover { background: rgba(255,255,255,.16); }
 .lb-nav { display: flex; gap: 8px; }
 
-@media (max-width: 760px) {
-  .hero .wrap, .about .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .hero .wrap { padding-block: 40px 28px; }
-  .about .wrap { padding-block: 48px; }
-  .grid { grid-template-columns: minmax(0, 1fr); }
-  .kit li { grid-template-columns: 7em minmax(0, 1fr); }
+@media (max-width: 900px) {
+  .hero .wrap, .event-head, .services .wrap, .contact .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tile.f { grid-row: auto; aspect-ratio: 3 / 2; }
+}
+@media (max-width: 520px) {
+  .svc { grid-template-columns: minmax(0, 1fr); }
+  .grid { gap: 6px; }
+  .tile figcaption { display: none; }
+  .index a { grid-template-columns: minmax(0, 1fr) auto; }
+  .index .o { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .frame canvas { transition: none; }
-  .frame button:hover canvas { transform: none; }
+  .tile img, .tile figcaption { transition: none; }
+  .tile button:hover img { transform: none; }
 }
 </style>
 
@@ -200,9 +177,8 @@ footer a { color: var(--muted); }
   <div class="wrap">
     <a class="brand" href="/"><b>flusss.de</b><span>/foto</span></a>
     <nav class="main" aria-label="Hauptnavigation">
-      <a href="#top" aria-current="page">Foto</a>
-      <a href="/messe/">Messe</a>
-      <a href="#about">Über mich</a>
+      <a href="#messen">Messen</a>
+      <a href="#leistungen">Leistungen</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
   </div>
@@ -211,41 +187,49 @@ footer a { color: var(--muted); }
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <h1>Fo<em>to</em></h1>
       <div>
-        <p>Landschaften, Straßen und Menschen. Fotografiert zwischen Rhein, Ostsee und den Orten dazwischen. Meist zu Fuß, mit einer Kamera und einem Objektiv.</p>
-        <div class="meta"><span>12 Bilder</span><span>2024 – 2026</span><span>Sony α7 V</span></div>
+        <h1>Messe&shy;foto&shy;grafie <em>für Aussteller</em></h1>
+        <p>Ich fotografiere Ihren Messeauftritt: den Stand, die Gespräche, die Exponate und das, was zwischen den Hallen passiert. Sie bekommen Bilder für Pressemitteilung, Website und LinkedIn.</p>
+        <ul class="index" id="index" aria-label="Messen"></ul>
+      </div>
+      <figure>
+        <button type="button" id="heroBtn" aria-label="Kaffeebar mit Live-Saxofon vergrößern">
+          <img src="/foto/img/nan04522.jpg" alt="Messestand mit Kaffeebar, ein Saxofonist spielt vor einem autonomen Lkw" width="1800" height="1200">
+        </button>
+        <figcaption><span>Kaffeebar mit Live-Saxofon</span><span class="label">Rotterdam · Juni 2023</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div id="messen"></div>
+  <div id="events"></div>
+
+  <section class="services" id="leistungen">
+    <div class="wrap">
+      <h2>Was ich auf der Messe fotografiere</h2>
+      <div class="svc">
+        <div><h3>Stand und Exponate</h3><p>Der Stand im Überblick, vor dem großen Andrang. Produkte im Detail, so wie Besucher sie sehen.</p></div>
+        <div><h3>Gespräche</h3><p>Ihr Team mit Kunden und Partnern. Unauffällig, ohne dass jemand für die Kamera posieren muss.</p></div>
+        <div><h3>Atmosphäre</h3><p>Eingänge, Hallen und Wege. Bilder, die zeigen, wo Sie waren und wie viel los war.</p></div>
+        <div><h3>Produkt in der Stadt</h3><p>Ihr Produkt vor Kulissen rund um den Messeort, für Social Media und Pressearbeit.</p></div>
+        <div class="kit">
+          <span class="label">Kamera<b>Sony α7 V</b></span>
+          <span class="label">Objektiv<b>Sony FE 28–70 mm F2 GM</b></span>
+          <span class="label">Einsatz<b>ganztägig oder halbtags</b></span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="filter" aria-label="Kategorien">
-    <div class="wrap" id="chips"></div>
-  </section>
-
-  <section class="sheet" aria-label="Bilder">
-    <div class="wrap">
-      <div class="edge" aria-hidden="true"><span>flusss · Kontaktbogen</span><span>Platzhalter – eigene Bilder folgen</span><span>▸ 1–12</span></div>
-      <div class="grid" id="grid"></div>
-    </div>
-  </section>
-
-  <section class="about" id="about">
+  <section class="contact" id="kontakt">
     <div class="wrap">
       <div>
-        <h2>Ich fotografiere, was am Rand passiert.</h2>
-        <p>Die meisten Bilder entstehen nebenbei: auf dem Weg zur Arbeit, am Wochenende am Fluss, auf Reisen ohne festen Plan. Mich interessiert das Licht kurz nach Sonnenaufgang und die Stunde, bevor die Straßenlaternen angehen.</p>
-        <p>Für Porträts, kleine Veranstaltungen oder Bilder für Ihre Website können Sie mich gern anfragen.</p>
-        <ul class="kit">
-          <li><span>Kamera</span><span>Sony α7 V</span></li>
-          <li><span>Objektiv</span><span>Sony FE 28–70 mm F2 GM</span></li>
-        </ul>
+        <h2>Ihre nächste Messe</h2>
+        <p>Sagen Sie mir, welche Messe, welche Tage und was Sie mit den Bildern vorhaben. Ich melde mich mit einem Angebot.</p>
       </div>
-      <aside class="contact" id="kontakt">
-        <h3>Kontakt</h3>
-        <p>Anfragen für Aufträge, Abzüge oder einfach ein Hallo.</p>
-        <p><a class="btn" href="https://flusss.de/impressum/">Kontaktdaten im Impressum</a></p>
-      </aside>
+      <div>
+        <a class="btn" href="https://flusss.de/impressum/">Kontaktdaten im Impressum</a>
+      </div>
     </div>
   </section>
 </main>
@@ -259,7 +243,7 @@ footer a { color: var(--muted); }
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Großansicht">
   <div class="lb-bar"><span id="lbNo"></span><button type="button" id="lbClose">Schließen ✕</button></div>
-  <div class="lb-stage" id="lbStage"></div>
+  <div class="lb-stage"><img id="lbImg" alt=""></div>
   <div class="lb-info">
     <div><div class="t" id="lbT"></div><div class="x" id="lbX"></div></div>
     <div class="lb-nav"><button type="button" id="lbPrev">← Zurück</button><button type="button" id="lbNext">Weiter →</button></div>
@@ -267,159 +251,65 @@ footer a { color: var(--muted); }
 </div>
 
 <script>
-// Platzhalterbilder: einfache gemalte Szenen, bis echte Fotos eingesetzt werden.
-const PHOTOS = [
-  { t: "Morgennebel am Rhein", c: "landschaft", x: "28 mm · f/8 · 1/250 s · ISO 160", p: ["#f3c9a3","#b9c7cf","#58707a","#2c3c42"], s: "hills", sun: .7 },
-  { t: "Hinterhof, Köln-Ehrenfeld", c: "stadt", x: "35 mm · f/2 · 1/60 s · ISO 800", p: ["#3d4a63","#8a6f5a","#d7a35e","#1e2230"], s: "city", tall: true },
-  { t: "Großmutter, Küche", c: "portraet", x: "70 mm · f/2 · 1/125 s · ISO 400", p: ["#e8c9a8","#a6735a","#5c3d32","#2a1d1a"], s: "portrait" },
-  { t: "Ostsee im Februar", c: "landschaft", x: "28 mm · f/11 · 1/500 s · ISO 125", p: ["#dfe6ea","#a7b8c2","#64808f","#34505e"], s: "sea", sun: .3 },
-  { t: "Letzte Bahn", c: "stadt", x: "35 mm · f/2 · 1/30 s · ISO 3200", p: ["#151a2b","#2f3a5c","#e2b34f","#0b0d14"], s: "city" },
-  { t: "Felder bei Bonn", c: "landschaft", x: "35 mm · f/5.6 · 1/320 s · ISO 100", p: ["#f1d7a0","#c9b26a","#7f8a4a","#3e4a2a"], s: "hills", sun: .2, tall: true },
-  { t: "Lena, Atelier", c: "portraet", x: "70 mm · f/2 · 1/60 s · ISO 800", p: ["#d8d8d4","#8f8f8a","#4e4e4b","#1d1d1c"], s: "portrait" },
-  { t: "Markthalle, Samstag", c: "stadt", x: "28 mm · f/4 · 1/125 s · ISO 640", p: ["#e9dcc6","#b8875b","#6c4a35","#2a2320"], s: "city" },
-  { t: "Abends am Deich", c: "landschaft", x: "35 mm · f/4 · 1/250 s · ISO 200", p: ["#f6b26b","#d9747a","#6b5a83","#2a2c45"], s: "sea", sun: .55 },
-  { t: "Tom, Werkstatt", c: "portraet", x: "35 mm · f/2 · 1/100 s · ISO 1250", p: ["#c9b394","#7d6650","#43362c","#191512"], s: "portrait", tall: true },
-  { t: "Regen, Südstadt", c: "stadt", x: "28 mm · f/2 · 1/60 s · ISO 1600", p: ["#5d6b78","#8d99a3","#c4a46a","#262d33"], s: "city" },
-  { t: "Eifel, erster Schnee", c: "landschaft", x: "28 mm · f/8 · 1/400 s · ISO 100", p: ["#eef1f3","#c7d0d6","#8b9aa3","#4a5961"], s: "hills", sun: .85 },
-];
-const CATS = [["alle","Alle"],["landschaft","Landschaft"],["stadt","Stadt"],["portraet","Porträt"]];
+const EVENTS = [{"id": "biofach25", "name": "BIOFACH 2025", "ort": "Messe Nürnberg", "datum": "11.–13. Februar 2025", "text": "Ein Stand aus Holz, Moos und Licht für eine Bio-Milchmarke. Dazu Produktbilder mitten im Grün des Stands und vor Kölner Kulissen.", "photos": [{"id": "nan01825", "t": "Der Stand am Morgen", "k": "f", "x": "28 mm · f/5.6 · 1/60 s · ISO 640"}, {"id": "nan01726", "t": "Leuchtschrift über dem Eingang", "k": "", "x": "75 mm · f/11 · 1/50 s · ISO 1000"}, {"id": "nan02023", "t": "Mittags auf dem Gang", "k": "", "x": "69 mm · f/5 · 1/15 s · ISO 100"}, {"id": "nan02056", "t": "Produkt im Grün", "k": "", "x": "28 mm · f/2.8 · 1/60 s · ISO 250"}, {"id": "nan02067", "t": "Zwischen den Blättern", "k": "", "x": "75 mm · f/2.8 · 1/50 s · ISO 125"}, {"id": "nan02131", "t": "Inszenierung am Stand", "k": "", "x": "75 mm · f/3.2 · 1/50 s · ISO 200"}, {"id": "nan02134", "t": "Auf dem Baumstumpf", "k": "", "x": "75 mm · f/2.8 · 1/50 s · ISO 200"}, {"id": "nan02153", "t": "Zwei Packungen im Moos", "k": "", "x": "28 mm · f/5.6 · 1/30 s · ISO 400"}, {"id": "nan02185", "t": "Vor Groß St. Martin, Köln", "k": "", "x": "32 mm · f/6.3 · 1/25 s · ISO 4000"}, {"id": "nan02187", "t": "Am Kölner Dom", "k": "", "x": "28 mm · f/5.6 · 1/160 s · ISO 1250"}]}, {"id": "logimat", "name": "LogiMAT 2024", "ort": "Messe Stuttgart", "datum": "19.–20. März 2024", "text": "Zwei Tage am Stand eines Gabelstapler-Herstellers: Probefahrten im Freigelände, Gespräche in der Halle und das Teamfoto zum Schluss.", "photos": [{"id": "nan08497", "t": "Der Stand in der Halle", "k": "f", "x": "28 mm · f/8 · 1/50 s · ISO 500"}, {"id": "nan08389", "t": "Elektrostapler vor der Halle", "k": "", "x": "28 mm · f/2.8 · 1/3200 s · ISO 500"}, {"id": "nan08452", "t": "Probefahrt im Freigelände", "k": "", "x": "68 mm · f/2.8 · 1/2500 s · ISO 500"}, {"id": "nan08561", "t": "Eingang Ost am Morgen", "k": "", "x": "65 mm · f/10 · 1/1600 s · ISO 500"}, {"id": "nan08463", "t": "Ein Besucher prüft die Details", "k": "", "x": "30 mm · f/2.8 · 1/1600 s · ISO 500"}, {"id": "nan08382", "t": "Ausprobieren erwünscht", "k": "", "x": "28 mm · f/4.5 · 1/500 s · ISO 500"}, {"id": "nan08396", "t": "Großstapler im Freigelände", "k": "", "x": "28 mm · f/2.8 · 1/5000 s · ISO 500"}, {"id": "nan08554", "t": "Blick aus der Kabine", "k": "", "x": "28 mm · f/9 · 1/800 s · ISO 500"}, {"id": "nan08461", "t": "Durch den Mast gesehen", "k": "", "x": "58 mm · f/2.8 · 1/1600 s · ISO 500"}, {"id": "nan08608", "t": "Modell auf dem Podest", "k": "", "x": "28 mm · f/4.5 · 1/60 s · ISO 500"}, {"id": "nan08776", "t": "Unter der Lichtdecke", "k": "", "x": "28 mm · f/5 · 1/40 s · ISO 500"}, {"id": "nan08531", "t": "Spontanes Gruppenfoto", "k": "f", "x": "65 mm · f/3.5 · 1/100 s · ISO 500"}, {"id": "nan08672", "t": "Besucher filmen den Stand", "k": "", "x": "32 mm · f/2.8 · 1/160 s · ISO 500"}, {"id": "nan08678", "t": "Handyfoto vom Exponat", "k": "", "x": "75 mm · f/2.8 · 1/160 s · ISO 500"}, {"id": "nan08739", "t": "Gespräch mit dem Standteam", "k": "", "x": "32 mm · f/2.8 · 1/125 s · ISO 500"}, {"id": "nan08350", "t": "Fachgespräch am Geländer", "k": "", "x": "51 mm · f/2.8 · 1/200 s · ISO 500"}, {"id": "nan08820", "t": "Teamfoto zum Abschluss", "k": "f", "x": "28 mm · f/4 · 1/80 s · ISO 500"}]}, {"id": "biofach", "name": "BIOFACH 2024", "ort": "Messe Nürnberg", "datum": "13.–15. Februar 2024", "text": "Drei Tage für eine Bio-Milchmarke: Verkostung am Stand, Stimmung auf dem Messegelände und Produktbilder vor Kulissen der Nürnberger Altstadt.", "photos": [{"id": "nan07640", "t": "Eingang Mitte am ersten Morgen", "k": "f", "x": "28 mm · f/2.8 · 1/160 s · ISO 250"}, {"id": "nan07380", "t": "Verkostung am Stand", "k": "", "x": "75 mm · f/3.5 · 1/125 s · ISO 640"}, {"id": "nan07690", "t": "Probieren und weitersagen", "k": "", "x": "44 mm · f/5 · 1/50 s · ISO 640"}, {"id": "nan07787", "t": "Die Standwand", "k": "", "x": "28 mm · f/5 · 1/80 s · ISO 640"}, {"id": "nan07875", "t": "Gespräch am Tresen", "k": "", "x": "69 mm · f/5 · 1/80 s · ISO 800"}, {"id": "nan07463", "t": "Laufpublikum am Stand", "k": "", "x": "75 mm · f/3.5 · 1/60 s · ISO 640"}, {"id": "nan07642", "t": "Schriftzug am Eingang", "k": "", "x": "38 mm · f/3.2 · 1/160 s · ISO 250"}, {"id": "nan07645", "t": "Werbewürfel auf dem Vorplatz", "k": "", "x": "28 mm · f/6.3 · 1/60 s · ISO 250"}, {"id": "nan07646", "t": "Unterwegs zu den Hallen", "k": "", "x": "75 mm · f/6.3 · 1/60 s · ISO 250"}, {"id": "nan07925", "t": "Produkt vor dem Eingang Mitte", "k": "f", "x": "37 mm · f/9 · 1/100 s · ISO 250"}, {"id": "nan07960", "t": "Am Heilig-Geist-Spital", "k": "", "x": "41 mm · f/16 · 1/50 s · ISO 250"}, {"id": "nan07942", "t": "Vor einer Kirche der Altstadt", "k": "", "x": "28 mm · f/5 · 1/640 s · ISO 250"}, {"id": "nan07989", "t": "Blick in die Altstadt", "k": "", "x": "29 mm · f/14 · 1/50 s · ISO 500"}]}, {"id": "hafen", "name": "Hafenlogistik-Messe", "ort": "Rotterdam", "datum": "13. Juni 2023", "text": "Ein Tag am Stand eines Anbieters autonomer Hafen-Lkw: das Fahrzeug als Blickfang, eine Kaffeebar mit Live-Saxofon und viele Gespräche.", "photos": [{"id": "nan04522", "t": "Kaffeebar mit Live-Saxofon", "k": "f", "x": "36 mm · f/5.6 · 1/50 s · ISO 320"}, {"id": "nan04523", "t": "Der Stand im Überblick", "k": "", "x": "28 mm · f/5.6 · 1/50 s · ISO 320"}, {"id": "nan04832", "t": "Der autonome Lkw", "k": "", "x": "75 mm · f/5.6 · 1/50 s · ISO 500"}, {"id": "nan04644", "t": "Kaffee am Stand", "k": "p", "x": "28 mm · f/6.3 · 1/50 s · ISO 320"}, {"id": "nan04552a", "t": "Gespräch unter Fachbesuchern", "k": "", "x": "45 mm · f/4 · 1/50 s · ISO 320"}, {"id": "nan04622", "t": "Visitenkarten tauschen", "k": "", "x": "28 mm · f/5 · 1/50 s · ISO 320"}, {"id": "nan04595", "t": "Besucher fotografieren die Infotafel", "k": "", "x": "75 mm · f/4.5 · 1/50 s · ISO 320"}, {"id": "nan04699", "t": "Erklärung im Gedränge", "k": "", "x": "75 mm · f/7.1 · 1/50 s · ISO 500"}, {"id": "nan04651", "t": "Am Fahrzeug", "k": "", "x": "75 mm · f/3.2 · 1/50 s · ISO 320"}, {"id": "nan04538", "t": "Orientierung im Gang", "k": "", "x": ""}, {"id": "nan04787", "t": "Live-Schalte auf der Videowand", "k": "", "x": "28 mm · f/10 · 1/50 s · ISO 500"}]}, {"id": "angacom", "name": "ANGA COM 2023", "ort": "Koelnmesse", "datum": "23. Mai 2023", "text": "Ein Vormittag auf der Kongressmesse für Breitband und Medien: Ankunft, Atmosphäre in den Hallen und Produktdetails am Stand.", "photos": [{"id": "nan04116", "t": "Eingang Nord am Morgen", "k": "f", "x": "28 mm · f/4.5 · 1/500 s · ISO 500"}, {"id": "nan04125", "t": "Boulevard zwischen den Hallen", "k": "", "x": "28 mm · f/4 · 1/50 s · ISO 500"}, {"id": "nan04099", "t": "Glasfaserkabel im Detail", "k": "", "x": "28 mm · f/5.6 · 1/50 s · ISO 500"}, {"id": "nan04110", "t": "Verteilerboxen", "k": "", "x": "28 mm · f/3.5 · 1/50 s · ISO 500"}, {"id": "nan04155", "t": "Produktgespräch", "k": "", "x": "59 mm · f/4.5 · 1/50 s · ISO 500"}, {"id": "nan04195", "t": "Fachbesucher am Exponat", "k": "", "x": "28 mm · f/4 · 1/50 s · ISO 500"}, {"id": "nan04232", "t": "Muster in der Hand", "k": "", "x": "41 mm · f/4 · 1/60 s · ISO 500"}]}, {"id": "medica", "name": "MEDICA 2021", "ort": "Messe Düsseldorf", "datum": "15. November 2021", "text": "Ein Vormittag am Stand eines Herstellers für Labordiagnostik, mitten in der Pandemie: Geräte im Detail, Besucher mit Maske, viel Blau.", "photos": [{"id": "nan00841", "t": "Der Stand im Überblick", "k": "f", "x": "28 mm · f/4 · 1/400 s · ISO 2000"}, {"id": "nan00779", "t": "Testkits im Detail", "k": "", "x": "28 mm · f/2.8 · 1/1000 s · ISO 2000"}, {"id": "nan00806", "t": "Blick ins Gerät", "k": "", "x": "64 mm · f/4 · 1/320 s · ISO 2000"}, {"id": "nan00838", "t": "Vorführung am Analysegerät", "k": "", "x": "75 mm · f/4 · 1/400 s · ISO 2000"}, {"id": "nan00851", "t": "Ein Besucher liest nach", "k": "", "x": "48 mm · f/4 · 1/400 s · ISO 2000"}, {"id": "nan00789", "t": "Unter dem Traversenrahmen", "k": "", "x": "28 mm · f/4 · 1/500 s · ISO 2000"}, {"id": "nan00906", "t": "Gespräch mit Maske", "k": "f", "x": "28 mm · f/4 · 1/125 s · ISO 800"}, {"id": "nan00878", "t": "Bewegung vor dem Stand", "k": "", "x": "28 mm · f/22 · 1/4 s · ISO 1250"}, {"id": "nan00931", "t": "Beratung am Gerät", "k": "", "x": "28 mm · f/5.6 · 1/80 s · ISO 800"}]}];
+const ALL = [];
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-function rng(seed) { return () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
-
-function paint(cv, ph, i, w, h) {
-  cv.width = w; cv.height = h;
-  const g = cv.getContext("2d"), r = rng(i * 7919 + 13), [a, b, c, d] = ph.p;
-  const sky = g.createLinearGradient(0, 0, 0, h);
-  sky.addColorStop(0, b); sky.addColorStop(.62, a); sky.addColorStop(1, c);
-  g.fillStyle = sky; g.fillRect(0, 0, w, h);
-
-  if (ph.s === "hills" || ph.s === "sea") {
-    if (ph.sun != null) {
-      const sx = w * ph.sun, sy = h * .5, rad = Math.min(w, h) * .09;
-      const glow = g.createRadialGradient(sx, sy, 0, sx, sy, rad * 5);
-      glow.addColorStop(0, "rgba(255,240,215,.85)"); glow.addColorStop(1, "rgba(255,240,215,0)");
-      g.fillStyle = glow; g.fillRect(0, 0, w, h);
-      g.fillStyle = "rgba(255,248,232,.95)"; g.beginPath(); g.arc(sx, sy, rad, 0, Math.PI * 2); g.fill();
-    }
-    if (ph.s === "hills") {
-      for (let L = 0; L < 4; L++) {
-        const base = h * (.55 + L * .11);
-        g.fillStyle = L === 3 ? d : mix(c, d, L / 3);
-        g.globalAlpha = .55 + L * .15;
-        g.beginPath(); g.moveTo(0, h);
-        const f1 = 1 + r() * 2, f2 = 2 + r() * 3, ph1 = r() * 6, amp = h * (.06 - L * .008);
-        for (let x = 0; x <= w; x += 6) g.lineTo(x, base - Math.sin(x / w * f1 * Math.PI + ph1) * amp - Math.sin(x / w * f2 * Math.PI) * amp * .4);
-        g.lineTo(w, h); g.fill();
-      }
-      g.globalAlpha = 1;
-    } else {
-      const hz = h * .6;
-      g.fillStyle = c; g.fillRect(0, hz, w, h - hz);
-      const sea = g.createLinearGradient(0, hz, 0, h); sea.addColorStop(0, c); sea.addColorStop(1, d);
-      g.fillStyle = sea; g.fillRect(0, hz, w, h - hz);
-      g.strokeStyle = "rgba(255,255,255,.25)"; g.lineWidth = 1;
-      for (let k = 0; k < 40; k++) { const y = hz + Math.pow(r(), 1.6) * (h - hz); const x = r() * w; g.beginPath(); g.moveTo(x, y); g.lineTo(x + 10 + r() * 40, y); g.stroke(); }
-    }
-  } else if (ph.s === "city") {
-    g.fillStyle = d;
-    let x = -10;
-    while (x < w) {
-      const bw = w * (.06 + r() * .12), bh = h * (.3 + r() * .55);
-      g.fillStyle = mix(d, c, r() * .25); g.fillRect(x, h - bh, bw, bh);
-      g.fillStyle = c;
-      for (let wy = h - bh + 10; wy < h - 12; wy += 14) for (let wx = x + 6; wx < x + bw - 8; wx += 11) if (r() > .62) { g.globalAlpha = .4 + r() * .6; g.fillRect(wx, wy, 5, 7); }
-      g.globalAlpha = 1; x += bw + 2;
-    }
-    const fog = g.createLinearGradient(0, h * .7, 0, h); fog.addColorStop(0, "rgba(0,0,0,0)"); fog.addColorStop(1, "rgba(0,0,0,.45)");
-    g.fillStyle = fog; g.fillRect(0, 0, w, h);
-  } else {
-    const light = g.createRadialGradient(w * .2, h * .2, 0, w * .2, h * .2, w * .9);
-    light.addColorStop(0, a); light.addColorStop(1, d);
-    g.fillStyle = light; g.fillRect(0, 0, w, h);
-    const cx = w * (.48 + r() * .1), cy = h * .42, s = Math.min(w, h);
-    g.fillStyle = c; g.beginPath(); g.ellipse(cx, h * 1.02, s * .42, s * .36, 0, Math.PI, 0); g.fill();
-    g.fillStyle = b; g.beginPath(); g.ellipse(cx, cy, s * .14, s * .18, 0, 0, Math.PI * 2); g.fill();
-    const shade = g.createLinearGradient(cx - s * .14, 0, cx + s * .14, 0);
-    shade.addColorStop(0, "rgba(0,0,0,0)"); shade.addColorStop(1, "rgba(0,0,0,.45)");
-    g.fillStyle = shade; g.beginPath(); g.ellipse(cx, cy, s * .14, s * .18, 0, 0, Math.PI * 2); g.fill();
-  }
-  // Korn
-  const img = g.getImageData(0, 0, w, h), px = img.data;
-  for (let k = 0; k < px.length; k += 4) { const n = (r() - .5) * 22; px[k] += n; px[k + 1] += n; px[k + 2] += n; }
-  g.putImageData(img, 0, 0);
-  // Vignette
-  const v = g.createRadialGradient(w / 2, h / 2, Math.min(w, h) * .35, w / 2, h / 2, Math.max(w, h) * .75);
-  v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.35)");
-  g.fillStyle = v; g.fillRect(0, 0, w, h);
-}
-function mix(h1, h2, t) {
-  const p = s => [1, 3, 5].map(i => parseInt(s.slice(i, i + 2), 16));
-  const A = p(h1), B = p(h2);
-  return "rgb(" + A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",") + ")";
-}
-
-const grid = document.getElementById("grid");
-const pad = n => String(n).padStart(2, "0");
-PHOTOS.forEach((ph, i) => {
-  const fig = document.createElement("figure");
-  fig.className = "frame" + (ph.tall ? " tall" : "");
-  fig.dataset.cat = ph.c;
-  fig.innerHTML = `<button type="button" aria-label="${ph.t} vergrößern"><canvas></canvas><span class="no">${pad(i + 1)}A</span></button>
-    <figcaption><span class="t">${ph.t}</span><span class="x">${ph.x.split(" · ").slice(0, 2).join(" · ")}</span></figcaption>`;
-  const [w, h] = ph.tall ? [480, 600] : [600, 400];
-  paint(fig.querySelector("canvas"), ph, i, w, h);
-  fig.querySelector("button").addEventListener("click", () => openLb(i));
-  grid.appendChild(fig);
+const index = document.getElementById("index");
+const host = document.getElementById("events");
+EVENTS.forEach(ev => {
+  index.insertAdjacentHTML("beforeend",
+    `<li><a href="#${ev.id}"><span class="n">${esc(ev.name)}</span><span class="o">${esc(ev.ort)}</span><span class="c">${ev.photos.length} Bilder</span></a></li>`);
+  const sec = document.createElement("section");
+  sec.className = "event"; sec.id = ev.id;
+  sec.innerHTML = `<div class="wrap">
+    <div class="event-head">
+      <div><div class="label facts"><span>${esc(ev.datum)}</span><span>${esc(ev.ort)}</span><span>${ev.photos.length} Bilder</span></div><h2>${esc(ev.name)}</h2></div>
+      <p>${esc(ev.text)}</p>
+    </div>
+    <div class="grid"></div></div>`;
+  const grid = sec.querySelector(".grid");
+  ev.photos.forEach(p => {
+    const i = ALL.length;
+    ALL.push({ ...p, ev });
+    grid.insertAdjacentHTML("beforeend",
+      `<figure class="tile ${p.k}"><button type="button" data-i="${i}" aria-label="${esc(p.t)} vergrößern"><img src="/foto/img/${p.id}-s.jpg" alt="${esc(p.t)}" loading="lazy" decoding="async"></button><figcaption>${esc(p.t)}</figcaption></figure>`);
+  });
+  host.appendChild(sec);
 });
+host.addEventListener("click", e => { const b = e.target.closest("button[data-i]"); if (b) openLb(+b.dataset.i); });
 
-let cat = "alle";
-try { cat = localStorage.getItem("foto-cat") || "alle"; } catch (e) {}
-const chips = document.getElementById("chips");
-CATS.forEach(([k, label]) => {
-  const n = k === "alle" ? PHOTOS.length : PHOTOS.filter(p => p.c === k).length;
-  const b = document.createElement("button");
-  b.className = "chip"; b.type = "button"; b.id = "chip-" + k;
-  b.innerHTML = `${label}<span class="n">${n}</span>`;
-  b.addEventListener("click", () => setCat(k));
-  chips.appendChild(b);
-});
-function setCat(k) {
-  cat = k;
-  try { localStorage.setItem("foto-cat", k); } catch (e) {}
-  chips.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.id === "chip-" + k));
-  grid.querySelectorAll(".frame").forEach(f => f.hidden = k !== "alle" && f.dataset.cat !== k);
-}
-setCat(cat);
-
-// Großansicht
-const lb = document.getElementById("lb");
-let cur = 0;
-function visible() { return PHOTOS.map((p, i) => i).filter(i => cat === "alle" || PHOTOS[i].c === cat); }
+const lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg");
+let cur = 0, opener = null;
 function openLb(i) {
-  cur = i; const ph = PHOTOS[i];
-  const cv = document.createElement("canvas");
-  paint(cv, ph, i, ph.tall ? 960 : 1500, ph.tall ? 1200 : 1000);
-  const st = document.getElementById("lbStage"); st.replaceChildren(cv);
-  document.getElementById("lbNo").textContent = pad(i + 1) + "A / " + pad(PHOTOS.length);
-  document.getElementById("lbT").textContent = ph.t;
-  document.getElementById("lbX").textContent = ph.x;
-  lb.hidden = false; document.body.style.overflow = "hidden";
-  document.getElementById("lbClose").focus();
+  cur = (i + ALL.length) % ALL.length;
+  const p = ALL[cur], inEv = p.ev.photos.indexOf(p.ev.photos.find(q => q.id === p.id)) + 1;
+  if (lb.hidden) opener = document.activeElement;
+  lbImg.src = `/foto/img/${p.id}.jpg`; lbImg.alt = p.t;
+  document.getElementById("lbNo").textContent = `${p.ev.name} · ${inEv} / ${p.ev.photos.length}`;
+  document.getElementById("lbT").textContent = p.t;
+  document.getElementById("lbX").textContent = [p.ev.ort, p.ev.datum, p.x].filter(Boolean).join(" · ");
+  if (lb.hidden) { lb.hidden = false; document.body.style.overflow = "hidden"; document.getElementById("lbClose").focus(); }
+  [cur - 1, cur + 1].forEach(k => { const q = ALL[(k + ALL.length) % ALL.length]; new Image().src = `/foto/img/${q.id}.jpg`; });
 }
-function step(d) { const v = visible(); const k = v.indexOf(cur); openLb(v[(k + d + v.length) % v.length]); }
-function closeLb() {
-  lb.hidden = true; document.body.style.overflow = "";
-  grid.children[cur]?.querySelector("button")?.focus();
-}
+function closeLb() { lb.hidden = true; document.body.style.overflow = ""; opener?.focus?.(); }
+document.getElementById("heroBtn").onclick = () => openLb(ALL.findIndex(p => p.id === "nan04522"));
 document.getElementById("lbClose").onclick = closeLb;
-document.getElementById("lbPrev").onclick = () => step(-1);
-document.getElementById("lbNext").onclick = () => step(1);
-lb.addEventListener("click", e => { if (e.target === lb || e.target.id === "lbStage") closeLb(); });
+document.getElementById("lbPrev").onclick = () => openLb(cur - 1);
+document.getElementById("lbNext").onclick = () => openLb(cur + 1);
+lb.addEventListener("click", e => { if (e.target === lb || e.target.classList.contains("lb-stage")) closeLb(); });
 document.addEventListener("keydown", e => {
   if (lb.hidden) return;
   if (e.key === "Escape") closeLb();
-  if (e.key === "ArrowLeft") step(-1);
-  if (e.key === "ArrowRight") step(1);
+  if (e.key === "ArrowLeft") openLb(cur - 1);
+  if (e.key === "ArrowRight") openLb(cur + 1);
+});
+let tx = null;
+lb.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
+lb.addEventListener("touchend", e => {
+  if (tx == null) return;
+  const dx = e.changedTouches[0].clientX - tx; tx = null;
+  if (Math.abs(dx) > 50) openLb(cur + (dx < 0 ? 1 : -1));
 });
 
 </script>
