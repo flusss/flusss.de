@@ -144,8 +144,9 @@ footer a { color: var(--muted); }
 }
 .lb[hidden] { display: none; }
 .lb-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; color: #e0a63c; text-transform: uppercase; }
-.lb-stage { display: grid; place-items: center; min-height: 0; padding-block: 12px; }
-.lb-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lb-stage { display: grid; place-items: center; min-height: 0; padding-block: 12px; container-type: size; }
+/* An der Höhe der Bühne messen (cqh) — max-height: 100% griff im Raster nicht, und in flachen Fenstern lief das Bild unter Titel und Knöpfe. */
+.lb-stage img { max-width: 100%; max-height: 100%; max-width: 100cqw; max-height: 100cqh; object-fit: contain; }
 .lb-info { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: end; }
 .lb-info .t { font-family: var(--display); font-size: 22px; font-weight: 700; }
 .lb-info .x { font-family: var(--mono); font-size: 12px; color: #9aa5a1; }
