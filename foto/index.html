@@ -21,7 +21,7 @@
   --fg: #15191b;
   --muted: #5d6763;
   --line: #c9cfcc;
-  --accent: #b5770f;
+  --accent: #8a5a0b;
   --tile: #d5dad8;
   --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
   --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -133,6 +133,8 @@ nav.main a:hover { color: var(--fg); }
 .contact { border-top: 1px solid var(--line); }
 .contact .wrap { padding-block: 64px; }
 .contact p { margin: 14px 0 0; max-width: 48ch; color: var(--muted); }
+.contact .anfrage { display: inline-block; margin-top: 8px; padding: 12px 20px; border-radius: 4px; background: var(--fg); color: var(--bg); font-weight: 600; text-decoration: none; }
+.contact .anfrage:hover { opacity: .88; }
 
 footer { border-top: 1px solid var(--line); }
 footer .wrap { padding-block: 22px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
@@ -227,6 +229,7 @@ footer a { color: var(--muted); }
       <div>
         <h2>Ihre nächste Messe</h2>
         <p>Sagen Sie mir, welche Messe, welche Tage und was Sie mit den Bildern vorhaben. Ich melde mich mit einem Angebot.</p>
+        <p><a class="anfrage" href="mailto:riversouth.jiang@gmail.com?subject=Anfrage%20Messefotografie">Anfrage per E-Mail senden</a></p>
       </div>
     </div>
   </section>
